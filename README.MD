@@ -1,65 +1,96 @@
 ## Definição de rotas da API
 
 ### Listar educandos
+
 TODO:
+
 - Incluir foto do educando
 
-GET /educandos
-RESPONSE
+`GET /educandos`
+
 ```json
+// RESPONSE
 [
   {
     "id": 1,
-    "nome_completo": "João da Sila",
+    "nome_completo": "Maria da Silva",
     "trilha": "Programação",
     "unidade": "SC401"
   },
-  ...
+  {
+    "id": 2,
+    "nome_completo": "João da Silva",
+    "trilha": "Design",
+    "unidade": "Pedra Branca"
+  },
 ]
 ```
 
 ### Listar inisignias
-GET / Insignias
-RESPONSE
+
+`GET /insignias`
+
 ```JSON
+// RESPONSE
 [
  {
-  "id":1,
-  "nome":"Python",
-  "trilha":"Programação",
+  "id": 1,
+  "nome": "Python",
+  "trilha": "Programação",
   "niveis": [
     {
       "id":1,
       "requisitos": [
         {
-          "id":1,
-          "descricao":"conhecer algoritmo"
+          "id": 1,
+          "descricao":"Leitura de arquivo CSV (Há vários dados no https://www.kaggle.com/datasets)."
         },
         {
-          "id":2,
-          "descricao":"conhecer variáveis"
+          "id": 2,
+          "descricao":"Transformar e utilizar do arquivo tipos primitivos: int, string, lista, tuplas e dicionários."
         },
         {
-          "id":3,
-          "descricao":"conhecer estruturas de controle"
+          "id": 3,
+          "descricao":"Estruturas condicionais e de repetição (if, else, for, while)"
+        },
+        {
+          "id": 4,
+          "descricao":"Criar métodos"
+        },
+        {
+          "id": 5,
+          "descricao":"Escrita de um arquivo CSV"
         }
       ]
     },
     {
-      "id":2,
+      "id": 2,
       "requisitos": [
         {
-          "id":1,
-          "descricao":"conhecer algoritmo"
+          "id": 1,
+          "descricao":"Conexão e manipulação do banco de dados."
         },
         {
-          "id":2,
-          "descricao":"conhecer variáveis"
+          "id": 2,
+          "descricao":"Manipulação de strings."
         },
         {
-          "id":3,
-          "descricao":"conhecer estruturas de controle"
+          "id": 3,
+          "descricao":"Instalação de módulos externos com PiP."
+        },
+        {
+          "id": 4,
+          "descricao":"Aplicação de paradigma funcional com map, reduce, filter e funções lambda."
         }
+      ]
+    },
+    {
+      "id": 3,
+      "requisitos": [
+        {
+          "id": 1,
+          "descricao":"Criação de API web com Django e Flask."
+        },
       ]
     }
   ]
@@ -73,44 +104,46 @@ RESPONSE
 - Registar conquista de insignias
 
 ### Registrar insignias Novas
-POST /insignia/criar
-PAYLOAD
+
+`POST /insignias/criar`
+
 ```json
+// PAYLOAD
 {
-  "nome":"Python",
-  "trilha":"Programação",
+  "nome": "Python",
+  "trilha": "Programação",
   "niveis": [
     {
-      "id":1,
+      "id": 1,
       "requisitos": [
         {
-          "id":1,
-          "descricao":"conhecer algoritmo"
+          "id": 1,
+          "descricao": "conhecer algoritmo"
         },
         {
-          "id":2,
-          "descricao":"conhecer variáveis"
+          "id": 2,
+          "descricao": "conhecer variáveis"
         },
         {
-          "id":3,
-          "descricao":"conhecer estruturas de controle"
+          "id": 3,
+          "descricao": "conhecer estruturas de controle"
         }
       ]
     },
     {
-      "id":2,
+      "id": 2,
       "requisitos": [
         {
-          "id":1,
-          "descricao":"conhecer algoritmo"
+          "id": 1,
+          "descricao": "conhecer algoritmo"
         },
         {
-          "id":2,
-          "descricao":"conhecer variáveis"
+          "id": 2,
+          "descricao": "conhecer variáveis"
         },
         {
-          "id":3,
-          "descricao":"conhecer estruturas de controle"
+          "id": 3,
+          "descricao": "conhecer estruturas de controle"
         }
       ]
     }
@@ -119,14 +152,18 @@ PAYLOAD
 ```
 
 SUCESSO 201
+
 ```json
+// RESPONSE
 {
-  "status": "success",
+  "status": "success"
 }
 ```
 
 ERROR 400
+
 ```json
+// RESPONSE
 {
   "status": "error",
   "message": "Erro na criação da insígnia",
@@ -135,6 +172,3 @@ ERROR 400
 ```
 
 - Registrar educando Novo
-
-
-
