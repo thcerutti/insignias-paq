@@ -8,8 +8,9 @@ TODO:
 
 `GET /educandos`
 
+RESPONSE:
+
 ```json
-// RESPONSE
 [
   {
     "id": 1,
@@ -30,8 +31,9 @@ TODO:
 
 `GET /insignias`
 
+RESPONSE:
+
 ```JSON
-// RESPONSE
 [
  {
   "id": 1,
@@ -107,8 +109,9 @@ TODO:
 
 `POST /insignias/criar`
 
+PAYLOAD:
+
 ```json
-// PAYLOAD
 {
   "nome": "Python",
   "trilha": "Programação",
@@ -151,19 +154,17 @@ TODO:
 }
 ```
 
-SUCESSO 201
+RESPONSE: `HTTP 201` (Created)
 
 ```json
-// RESPONSE
 {
   "status": "success"
 }
 ```
 
-ERROR 400
+RESPONSE: `HTTP: 400` (Bad Request)
 
 ```json
-// RESPONSE
 {
   "status": "error",
   "message": "Erro na criação da insígnia",
