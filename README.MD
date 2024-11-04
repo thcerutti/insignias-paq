@@ -33,70 +33,70 @@ RESPONSE:
 
 RESPONSE:
 
-```JSON
+```json
 [
- {
-  "id": 1,
-  "nome": "Python",
-  "trilha": "Programação",
-  "niveis": [
-    {
-      "id":1,
-      "requisitos": [
-        {
-          "id": 1,
-          "descricao":"Leitura de arquivo CSV (Há vários dados no https://www.kaggle.com/datasets)."
-        },
-        {
-          "id": 2,
-          "descricao":"Transformar e utilizar do arquivo tipos primitivos: int, string, lista, tuplas e dicionários."
-        },
-        {
-          "id": 3,
-          "descricao":"Estruturas condicionais e de repetição (if, else, for, while)"
-        },
-        {
-          "id": 4,
-          "descricao":"Criar métodos"
-        },
-        {
-          "id": 5,
-          "descricao":"Escrita de um arquivo CSV"
-        }
-      ]
-    },
-    {
-      "id": 2,
-      "requisitos": [
-        {
-          "id": 1,
-          "descricao":"Conexão e manipulação do banco de dados."
-        },
-        {
-          "id": 2,
-          "descricao":"Manipulação de strings."
-        },
-        {
-          "id": 3,
-          "descricao":"Instalação de módulos externos com PiP."
-        },
-        {
-          "id": 4,
-          "descricao":"Aplicação de paradigma funcional com map, reduce, filter e funções lambda."
-        }
-      ]
-    },
-    {
-      "id": 3,
-      "requisitos": [
-        {
-          "id": 1,
-          "descricao":"Criação de API web com Django e Flask."
-        },
-      ]
-    }
-  ]
- }
+  {
+    "id": 1,
+    "nome": "Python",
+    "trilha": "Programação",
+    "niveis": [
+      {
+        "id": 1,
+        "requisitos": [
+          {
+            "id": 1,
+            "descricao": "Leitura de arquivo CSV (Há vários dados no https://www.kaggle.com/datasets)."
+          },
+          {
+            "id": 2,
+            "descricao": "Transformar e utilizar do arquivo tipos primitivos: int, string, lista, tuplas e dicionários."
+          },
+          {
+            "id": 3,
+            "descricao": "Estruturas condicionais e de repetição (if, else, for, while)"
+          },
+          {
+            "id": 4,
+            "descricao": "Criar métodos"
+          },
+          {
+            "id": 5,
+            "descricao": "Escrita de um arquivo CSV"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "requisitos": [
+          {
+            "id": 1,
+            "descricao": "Conexão e manipulação do banco de dados."
+          },
+          {
+            "id": 2,
+            "descricao": "Manipulação de strings."
+          },
+          {
+            "id": 3,
+            "descricao": "Instalação de módulos externos com PiP."
+          },
+          {
+            "id": 4,
+            "descricao": "Aplicação de paradigma funcional com map, reduce, filter e funções lambda."
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "requisitos": [
+          {
+            "id": 1,
+            "descricao": "Criação de API web com Django e Flask."
+          },
+        ]
+      }
+    ]
+  }
 ]
 ```
 
@@ -121,15 +121,23 @@ PAYLOAD:
       "requisitos": [
         {
           "id": 1,
-          "descricao": "conhecer algoritmo"
+          "descricao": "Leitura de arquivo CSV (Há vários dados no https://www.kaggle.com/datasets)."
         },
         {
           "id": 2,
-          "descricao": "conhecer variáveis"
+          "descricao": "Transformar e utilizar do arquivo tipos primitivos: int, string, lista, tuplas e dicionários."
         },
         {
           "id": 3,
-          "descricao": "conhecer estruturas de controle"
+          "descricao": "Estruturas condicionais e de repetição (if, else, for, while)"
+        },
+        {
+          "id": 4,
+          "descricao": "Criar métodos"
+        },
+        {
+          "id": 5,
+          "descricao": "Escrita de um arquivo CSV"
         }
       ]
     },
@@ -138,15 +146,28 @@ PAYLOAD:
       "requisitos": [
         {
           "id": 1,
-          "descricao": "conhecer algoritmo"
+          "descricao": "Conexão e manipulação do banco de dados."
         },
         {
           "id": 2,
-          "descricao": "conhecer variáveis"
+          "descricao": "Manipulação de strings."
         },
         {
           "id": 3,
-          "descricao": "conhecer estruturas de controle"
+          "descricao": "Instalação de módulos externos com PiP."
+        },
+        {
+          "id": 4,
+          "descricao": "Aplicação de paradigma funcional com map, reduce, filter e funções lambda."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "requisitos": [
+        {
+          "id": 1,
+          "descricao": "Criação de API web com Django e Flask."
         }
       ]
     }
