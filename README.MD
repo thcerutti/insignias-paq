@@ -151,7 +151,7 @@ RESPONSE:
 ```
 ### Registar conquista de insignias
 
-`POST /insignias/conquista-insignia`
+`POST /educando/conquista-insignia`
 
 PAYLOAD:
 ```json
