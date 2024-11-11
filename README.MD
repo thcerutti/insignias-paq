@@ -99,12 +99,77 @@ RESPONSE:
   }
 ]
 ```
+### Listar Insignias de um educando
 
-- insignias de um educando
-- Listar níveis de insignias
-- Listar os requisitos
-- Registar conquista de insignias
+`GET /educando/insignia`
 
+RESPONSE:
+
+```json
+
+[
+  {
+    "Nome": "paulo",
+    "trilha": "programação",
+    "insignias": [
+      {
+        "id":1,
+        "nome": "python",
+        "nivel": 2,
+      },
+      {
+        "id":2,
+        "nome": "logica de programação",
+        "nivel": 3,
+        
+      },
+      {
+        "id":3,
+        "nome": "javascript",
+        "nivel": 3,
+        
+      }
+    ]
+  }
+]
+```
+### Listar os requisitos
+`GET /insignias/insignias-requisitos`
+
+RESPONSE:
+
+```json
+
+[
+  {
+    "id-insignia":1,
+    "nome":"Python",
+    "nivel":1,
+    "requisitos":"Manipulação de strings"
+  }
+]
+```
+### Registar conquista de insignias
+
+`POST /insignias/conquista-insignia`
+
+PAYLOAD:
+```json
+
+[
+  {
+    "id-educando": 1, 
+    "insigina":[
+      {                                                  
+        "id-insignia":1,                      
+        "nivel":1,                                                                         
+        "data_conclusão":"20/10",
+      }  
+   ]
+  }
+]
+
+```
 ### Registrar insignias Novas
 
 `POST /insignias/criar`
