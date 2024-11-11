@@ -10,7 +10,7 @@ def hello_world():
         "message": "Hello, World!"
     }, 200
 
-@app.route("/educandos")
+@app.route("/educandos", methods=["GET"])
 def get_educandos():
     return {
         "data": [
