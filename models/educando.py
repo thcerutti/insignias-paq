@@ -15,5 +15,5 @@ class Educando:
       "nome_completo": self.nome_completo,
       "unidade": self.unidade,
       "trilhas": self.trilhas,
-      "insignias": [self.insignias]
+      "insignias": self.insignias
     }
