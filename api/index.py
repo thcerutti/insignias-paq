@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_cors import CORS
+from models.educando import Educando
 
 app = Flask(__name__)
 CORS(app)
@@ -14,20 +15,11 @@ def hello_world():
 def get_educandos():
     return {
         "data": [
-        {
-            "id": 1,
-            "nome_completo": "Maria da Silva",
-            "trilha": "Programação",
-            "unidade": "SC401"
-        },
-        {
-            "id": 2,
-            "nome_completo": "João da Silva",
-            "trilha": "Design",
-            "unidade": "Pedra Branca"
-        },
-    ]
-}, 200
+            Educando(1, "Thiago", "SC401", ["Programação"], ["Python", "Javascript"]).to_json(),
+            Educando(2, "Maria Perreira", "Pedra Branca", ["Design"], ["Photoshop", "Illustrator"]).to_json(),
+            Educando(3, "João da Silva", "SC401", ["Programação", "Design"], ["Python", "Illustrator"]).to_json()
+        ]
+    }, 200
 
 @app.route("/insignias", methods=["GET"])
 def get_insignias():
@@ -97,7 +89,7 @@ def get_insignias():
         }
         ]
 }, 200
-    
+
 @app.route("/educando/<int:id>/insignias", methods=["GET"])
 def get_insiginias_educando(id):
     return{
@@ -115,19 +107,19 @@ def get_insiginias_educando(id):
                     "id":2,
                     "nome": "logica de programação",
                     "nivel": 3,
-                    
+
                 },
                 {
                     "id":3,
                     "nome": "javascript",
                     "nivel": 3,
-                    
+
                 }
             ]
         }
     ]
 }, 200
-    
+
 @app.route("/insignias/<int:id>/requisitos", methods=["GET"])
 def get_requisitos(id):
     return{
