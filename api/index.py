@@ -1,6 +1,8 @@
 from flask import Flask
 from flask_cors import CORS
 from models.educando import Educando
+from models.insignia import Insignia
+from models.nivel_insignia import Nivel_insignia
 
 app = Flask(__name__)
 CORS(app)
@@ -23,72 +25,32 @@ def get_educandos():
 
 @app.route("/insignias", methods=["GET"])
 def get_insignias():
+    requisitos = {
+        "python": [
+            Nivel_insignia(1, [
+                "Leitura de arquivo CSV (Há vários dados no https://www.kaggle.com/datasets).",
+                "Transformar e utilizar do arquivo tipos primitivos: int, string, lista, tuplas e dicionários.",
+                "Estruturas condicionais e de repetição (if, else, for, while)",
+                "Criar métodos",
+                "Escrita de um arquivo CSV"
+            ]),
+            Nivel_insignia(2, [
+                "Conexão e manipulação do banco de dados.",
+                "Manipulação de strings.",
+                "Instalação de módulos externos com PiP.",
+                "Aplicação de paradigma funcional com map, reduce, filter e funções lambda."
+            ]),
+            Nivel_insignia(3, [
+                "Criação de API web com Django e Flask."
+            ])
+        ]
+    }
+    print(requisitos)
     return {
         "data": [
-        {
-            "id": 1,
-            "nome": "Python",
-            "trilha": "Programação",
-            "niveis": [
-            {
-                "id": 1,
-                "requisitos": [
-                {
-                    "id": 1,
-                    "descricao": "Leitura de arquivo CSV (Há vários dados no https://www.kaggle.com/datasets)."
-                },
-                {
-                    "id": 2,
-                    "descricao": "Transformar e utilizar do arquivo tipos primitivos: int, string, lista, tuplas e dicionários."
-                },
-                {
-                    "id": 3,
-                    "descricao": "Estruturas condicionais e de repetição (if, else, for, while)"
-                },
-                {
-                    "id": 4,
-                    "descricao": "Criar métodos"
-                },
-                {
-                    "id": 5,
-                    "descricao": "Escrita de um arquivo CSV"
-                }
-                ]
-            },
-            {
-                "id": 2,
-                "requisitos": [
-                {
-                    "id": 1,
-                    "descricao": "Conexão e manipulação do banco de dados."
-                },
-                {
-                    "id": 2,
-                    "descricao": "Manipulação de strings."
-                },
-                {
-                    "id": 3,
-                    "descricao": "Instalação de módulos externos com PiP."
-                },
-                {
-                    "id": 4,
-                    "descricao": "Aplicação de paradigma funcional com map, reduce, filter e funções lambda."
-                }
-                ]
-            },
-            {
-                "id": 3,
-                "requisitos": [
-                {
-                    "id": 1,
-                    "descricao": "Criação de API web com Django e Flask."
-                },
-                ]
-            }
-            ]
-        }
+            Insignia(1, "Python", "Programação", requisitos["python"]).to_json(),
         ]
-}, 200
+    }, 200
 
 @app.route("/educando/<int:id>/insignias", methods=["GET"])
 def get_insiginias_educando(id):

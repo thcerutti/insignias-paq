@@ -1,4 +1,7 @@
-class Educando:
+
+from models.modelo_base import Modelo_base
+
+class Educando(Modelo_base):
   def __init__(self, id, nome_completo, unidade, trilhas, insignias):
     self.id = id
     self.nome_completo = nome_completo
