@@ -3,6 +3,7 @@ from flask_cors import CORS
 from models.educando import Educando
 from models.insignia import Insignia
 from models.nivel_insignia import Nivel_insignia
+from flask import request
 
 app = Flask(__name__)
 CORS(app)
@@ -39,8 +40,12 @@ def get_requisitos(id):
 
 @app.route("/educando/conquista", methods=["POST"])
 def post_conquista_insignia():
-    return{
-        "data":{
-            "status": "success"
+
+    data = request.get_json()
+    print("name", data["name"])
+    return {
+        "data": {
+            "status": "success",
+            "payload_received": data,
         }
-    }
+    }, 200
