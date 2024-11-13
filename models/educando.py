@@ -9,6 +9,11 @@ class Educando(Modelo_base):
     self.trilhas = trilhas
     self.insignias = insignias
 
+  @staticmethod
+  def carregar_educando(id):
+    educandos = [educando for educando in Educando.listar_educandos() if educando.id == id]
+    return educandos[0] if educandos else None
+
   def registrar_conquista_de_insignia(self, insignia):
     self.insignias.append(insignia)
 

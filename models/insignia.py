@@ -9,6 +9,11 @@ class Insignia(Modelo_base):
     self.niveis = niveis
 
   @staticmethod
+  def carregar_insignia(id):
+    insignias = [insignia for insignia in Insignia.listar_insignias() if insignia.id == id]
+    return insignias[0] if insignias else None
+
+  @staticmethod
   def listar_insignias():
     return [
       Insignia(1, "Python", "Programação", [

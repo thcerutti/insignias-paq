@@ -1,3 +1,4 @@
+from datetime import datetime
 from flask import Flask
 from flask_cors import CORS
 from models.educando import Educando
@@ -40,12 +41,27 @@ def get_requisitos(id):
 
 @app.route("/educando/conquista", methods=["POST"])
 def post_conquista_insignia():
-
+    # Exemplo de payload:
+    # ```json
+    # {
+    #     "educando_id": 1,
+    #     "insignia_id": 1,
+    #     "nivel_insignia": 3,
+    #     "data_conquista": "2024-11-13"
+    # }
+    # ```
     data = request.get_json()
-    print("name", data["name"])
+    educando = Educando.carregar_educando(data["educando_id"])
+    insignia = Insignia.carregar_insignia(data["insignia_id"])
     return {
         "data": {
             "status": "success",
-            "payload_received": data,
+            "educando_id": data["educando_id"],
+            "educando_nome": educando.nome_completo,
+            "insignia_id": data["insignia_id"],
+            "insignia_nome": insignia.nome,
+            "nivel_insignia": data["nivel_insignia"],
+            "data_conquista": data["data_conquista"],
+            "data_registro": datetime.now().isoformat()
         }
-    }, 200
+    }, 201
