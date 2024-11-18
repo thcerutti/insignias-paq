@@ -8,11 +8,11 @@ class Insignia(Modelo_base):
     self.nome = nome
     self.trilha = trilha
     self.niveis = niveis
-
+ 
   @staticmethod
   def carregar_insignia(id):
-    insignias = [insignia for insignia in Insignia.listar_insignias() if insignia.id == id]
-    return insignias[0] if insignias else None
+    insignia = [insignia.to_json() for insignia in Insignia.listar_insignias() if insignia.id == id]
+    return insignia[0] if insignia else None
 
   @staticmethod
   def listar_insignias():
@@ -37,15 +37,10 @@ class Insignia(Modelo_base):
       ])
     ]
     
-  def criar_insignia(self):
+  def gravar_insignia(self):
     return (
       self.nome + "foi salva com sucesso"
     )
-    
-
-  @staticmethod
-  def listar_insignia_por_id(id):
-    return [insignia.to_json() for insignia in Insignia.listar_insignias() if insignia.id == id]
 
   def to_json(self):
     return {

@@ -22,21 +22,21 @@ def get_educandos():
         
 @app.route("/insignias", methods=["GET"])
 def get_insignias():
-    return jsonify({
+    return {
         "data": [insignia.to_json() for insignia in Insignia.listar_insignias()]
-    }), 200 
+    }, 200 
     
 @app.route("/educando/<int:id>/insignias", methods=["GET"])
-def get_insiginias_educando(id):
-    return jsonify({
-        "data": [insignia.to_json() for insignia in Educando.listar_insignias(id)]
-    }), 200
+def get_insiginias_educando(id):   
+    return {
+        "data": [insignia for insignia in Educando.carregar_educando(id).insignias]
+    }, 200
 
 @app.route("/insignias/<int:id>/requisitos", methods=["GET"])
 def get_requisitos(id):
-    return jsonify({
-        "data": Insignia.listar_insignia_por_id(id)
-    }), 200
+    return {
+        "data": Insignia.carregar_insignia(id)
+    }, 200
      
 @app.route("/educando/conquista", methods=["POST"])
 def post_conquista_insignia():
@@ -67,7 +67,7 @@ def post_criar_insiginia():
     
     data = request.get_json()
     insignia = Insignia(data.get("id"),data.get("nome"),data.get("trilha"),data.get("niveis"))
-    mensagem = insignia.criar_insignia()
+    mensagem = insignia.gravar_insignia()
     # if not data.get("nome"):
     #     return {"error": "O campo 'nome' é obrigatório."}, 400
     # if not data.get("trilha"):
