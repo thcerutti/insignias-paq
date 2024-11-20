@@ -1,0 +1,146 @@
+[
+  {
+    "id": 1,
+    "insignias": [
+      "JAVA",
+      "PYTHON"
+    ],
+    "nome_completo": "Nilberto Silva",
+    "trilha": "PEDRA BRANCA",
+    "unidade": [
+      "Programação"
+    ]
+  },
+  {
+    "id": 2,
+    "insignias": [
+      "Cookie",
+      "Academia"
+    ],
+    "nome_completo": "Joilson Nunes",
+    "trilha": "SC401",
+    "unidade": [
+      "Programação"
+    ]
+  },
+  {
+    "id": 3,
+    "insignias": [
+      "HTML",
+      "CSS"
+    ],
+    "nome_completo": "Mariana Costa",
+    "trilha": "PEDRA BRANCA",
+    "unidade": [
+      "Design"
+    ]
+  },
+  {
+    "id": 4,
+    "insignias": [
+      "JavaScript",
+      "React"
+    ],
+    "nome_completo": "Carlos Souza",
+    "trilha": "SC401",
+    "unidade": [
+      "Programação"
+    ]
+  },
+  {
+    "id": 5,
+    "insignias": [
+      "Photoshop",
+      "Illustrator"
+    ],
+    "nome_completo": "Ana Paula",
+    "trilha": "PEDRA BRANCA",
+    "unidade": [
+      "Design"
+    ]
+  },
+  {
+    "id": 6,
+    "insignias": [
+      "Node.js",
+      "Express"
+    ],
+    "nome_completo": "Ricardo Lima",
+    "trilha": "SC401",
+    "unidade": [
+      "Programação"
+    ]
+  },
+  {
+    "id": 7,
+    "insignias": [
+      "Figma",
+      "Sketch"
+    ],
+    "nome_completo": "Beatriz Oliveira",
+    "trilha": "PEDRA BRANCA",
+    "unidade": [
+      "Design"
+    ]
+  },
+  {
+    "id": 8,
+    "insignias": [
+      "Vue.js",
+      "Nuxt.js"
+    ],
+    "nome_completo": "Fernando Almeida",
+    "trilha": "SC401",
+    "unidade": [
+      "Programação"
+    ]
+  },
+  {
+    "id": 9,
+    "insignias": [
+      "InDesign",
+      "After Effects"
+    ],
+    "nome_completo": "Juliana Martins",
+    "trilha": "PEDRA BRANCA",
+    "unidade": [
+      "Design"
+    ]
+  },
+  {
+    "id": 10,
+    "insignias": [
+      "Angular",
+      "TypeScript"
+    ],
+    "nome_completo": "Gabriel Santos",
+    "trilha": "SC401",
+    "unidade": [
+      "Programação"
+    ]
+  },
+  {
+    "id": 11,
+    "insignias": [
+      "Bootstrap",
+      "Sass"
+    ],
+    "nome_completo": "Larissa Ferreira",
+    "trilha": "PEDRA BRANCA",
+    "unidade": [
+      "Design"
+    ]
+  },
+  {
+    "id": 12,
+    "insignias": [
+      "Ruby",
+      "Rails"
+    ],
+    "nome_completo": "Thiago Rocha",
+    "trilha": "SC401",
+    "unidade": [
+      "Programação"
+    ]
+  }
+]

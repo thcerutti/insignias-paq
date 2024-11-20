@@ -1,0 +1,286 @@
+[
+  {
+    "id": 1,
+    "nome": "Python",
+    "trilha": "Programação",
+    "niveis": [
+      {
+        "id": 1,
+        "requisitos": [
+          "Leitura de arquivo CSV (Há vários dados no https://www.kaggle.com/datasets).",
+          "Transformar e utilizar do arquivo tipos primitivos: int, string, lista, tuplas e dicionários.",
+          "Estruturas condicionais e de repetição (if, else, for, while)",
+          "Criar métodos",
+          "Escrita de um arquivo CSV"
+        ]
+      },
+      {
+        "id": 2,
+        "requisitos": [
+          "Conexão e manipulação do banco de dados.",
+          "Manipulação de strings.",
+          "Instalação de módulos externos com PiP.",
+          "Aplicação de paradigma funcional com map, reduce, filter e funções lambda."
+        ]
+      },
+      {
+        "id": 3,
+        "requisitos": [
+          "Criação de API web com Django e Flask."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "nome": "CSS/HTML",
+    "trilha": "Desenvolvimento Web",
+    "niveis": [
+      {
+        "id": 1,
+        "requisitos": [
+          "Estrutura básica de um documento HTML.",
+          "Tags semânticas.",
+          "Estilização com CSS.",
+          "Box model.",
+          "Flexbox e Grid Layout."
+        ]
+      },
+      {
+        "id": 2,
+        "requisitos": [
+          "Media queries e design responsivo.",
+          "Animações e transições.",
+          "Pré-processadores CSS (Sass, Less).",
+          "Metodologias de organização de CSS (BEM, OOCSS)."
+        ]
+      },
+      {
+        "id": 3,
+        "requisitos": [
+          "Acessibilidade em HTML e CSS.",
+          "SEO básico.",
+          "Ferramentas de desenvolvimento e depuração."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "nome": "Design gráfico",
+    "trilha": "Design",
+    "niveis": [
+      {
+        "id": 1,
+        "requisitos": [
+          "Princípios básicos de design.",
+          "Teoria das cores.",
+          "Tipografia.",
+          "Ferramentas de design (Photoshop, Illustrator)."
+        ]
+      },
+      {
+        "id": 2,
+        "requisitos": [
+          "Criação de logotipos.",
+          "Design de materiais impressos.",
+          "Design de identidade visual."
+        ]
+      },
+      {
+        "id": 3,
+        "requisitos": [
+          "Design para web.",
+          "Design para mídias sociais.",
+          "Portfólio de design."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "nome": "Design de Interface (web)",
+    "trilha": "Design",
+    "niveis": [
+      {
+        "id": 1,
+        "requisitos": [
+          "Princípios de design de interface.",
+          "Wireframing.",
+          "Ferramentas de prototipagem (Figma, Sketch)."
+        ]
+      },
+      {
+        "id": 2,
+        "requisitos": [
+          "Design responsivo.",
+          "Componentes de interface.",
+          "Design de sistemas."
+        ]
+      },
+      {
+        "id": 3,
+        "requisitos": [
+          "Testes de usabilidade.",
+          "Acessibilidade em design.",
+          "Design centrado no usuário."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "nome": "Design de Interface (mobile)",
+    "trilha": "Design",
+    "niveis": [
+      {
+        "id": 1,
+        "requisitos": [
+          "Princípios de design de interface mobile.",
+          "Wireframing para mobile.",
+          "Ferramentas de prototipagem (Figma, Sketch)."
+        ]
+      },
+      {
+        "id": 2,
+        "requisitos": [
+          "Design responsivo para mobile.",
+          "Componentes de interface mobile.",
+          "Design de sistemas para mobile."
+        ]
+      },
+      {
+        "id": 3,
+        "requisitos": [
+          "Testes de usabilidade mobile.",
+          "Acessibilidade em design mobile.",
+          "Design centrado no usuário para mobile."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "nome": "User Experience",
+    "trilha": "Design",
+    "niveis": [
+      {
+        "id": 1,
+        "requisitos": [
+          "Princípios de UX.",
+          "Pesquisa com usuários.",
+          "Personas e jornadas do usuário."
+        ]
+      },
+      {
+        "id": 2,
+        "requisitos": [
+          "Arquitetura da informação.",
+          "Design de interação.",
+          "Prototipagem e testes de usabilidade."
+        ]
+      },
+      {
+        "id": 3,
+        "requisitos": [
+          "Métricas e análise de UX.",
+          "Design centrado no usuário.",
+          "Acessibilidade em UX."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "nome": "Lógica de Programação",
+    "trilha": "Programação",
+    "niveis": [
+      {
+        "id": 1,
+        "requisitos": [
+          "Conceitos básicos de lógica.",
+          "Estruturas condicionais.",
+          "Estruturas de repetição."
+        ]
+      },
+      {
+        "id": 2,
+        "requisitos": [
+          "Funções e procedimentos.",
+          "Estruturas de dados (listas, pilhas, filas).",
+          "Algoritmos de ordenação e busca."
+        ]
+      },
+      {
+        "id": 3,
+        "requisitos": [
+          "Recursão.",
+          "Complexidade de algoritmos.",
+          "Programação orientada a objetos."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "nome": "JavaScript",
+    "trilha": "Programação",
+    "niveis": [
+      {
+        "id": 1,
+        "requisitos": [
+          "Sintaxe básica do JavaScript.",
+          "Manipulação do DOM.",
+          "Eventos e funções."
+        ]
+      },
+      {
+        "id": 2,
+        "requisitos": [
+          "Manipulação de arrays e objetos.",
+          "Promises e async/await.",
+          "APIs e AJAX."
+        ]
+      },
+      {
+        "id": 3,
+        "requisitos": [
+          "Programação assíncrona.",
+          "ES6+ e módulos.",
+          "Testes com JavaScript."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "nome": "Frameworks de Frontend",
+    "trilha": "Desenvolvimento Web",
+    "niveis": [
+      {
+        "id": 1,
+        "requisitos": [
+          "Conceitos básicos de frameworks.",
+          "Introdução ao React.",
+          "Componentes e props."
+        ]
+      },
+      {
+        "id": 2,
+        "requisitos": [
+          "Estado e ciclo de vida.",
+          "Introdução ao Vue.js.",
+          "Diretivas e componentes."
+        ]
+      },
+      {
+        "id": 3,
+        "requisitos": [
+          "Gerenciamento de estado com Redux/Vuex.",
+          "Testes em frameworks.",
+          "Boas práticas e padrões de projeto."
+        ]
+      }
+    ]
+  }
+]
