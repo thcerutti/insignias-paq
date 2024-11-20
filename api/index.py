@@ -16,9 +16,10 @@ def hello_world():
 
 @app.route("/educandos", methods=["GET"])
 def get_educandos():
-    return jsonify({
-        "data": [educando.to_json() for educando in Educando.Listar_educandos()]
-    }), 200
+    educandos = [educando.to_json() for educando in Educando.Listar_educandos()]
+    if not educandos:
+        return {"error": "Educandos não encontrados."}, 404
+    return educandos, 200
 
 @app.route("/insignias", methods=["GET"])
 def get_insignias():
@@ -59,16 +60,14 @@ def post_conquista_insignia():
     insignia = Insignia.carregar_insignia(data["insignia_id"])
 
     return {
-        "data": {
-            "status": "success",
-            "educando_id": data["educando_id"],
-            "educando_nome": educando.nome,
-            "insignia_id": data["insignia_id"],
-            "insignia_nome": insignia.nome,
-            "nivel_insignia": data["nivel_insignia"],
-            "data_conquista": data["data_conquista"],
-            "data_registro": datetime.now().isoformat()
-        }
+        "status": "success",
+        "educando_id": data["educando_id"],
+        "educando_nome": educando.nome,
+        "insignia_id": data["insignia_id"],
+        "insignia_nome": insignia.nome,
+        "nivel_insignia": data["nivel_insignia"],
+        "data_conquista": data["data_conquista"],
+        "data_registro": datetime.now().isoformat()
     }, 201
 
 @app.route("/insignias/criar", methods=["POST"])
