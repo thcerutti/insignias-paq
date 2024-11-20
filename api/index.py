@@ -19,25 +19,36 @@ def get_educandos():
     return jsonify({
         "data": [educando.to_json() for educando in Educando.Listar_educandos()]
     }), 200
-        
+
 @app.route("/insignias", methods=["GET"])
 def get_insignias():
-    return {
-        "data": [insignia.to_json() for insignia in Insignia.listar_insignias()]
-    }, 200 
-    
-@app.route("/educando/<int:id>/insignias", methods=["GET"])
-def get_insiginias_educando(id):   
-    return {
-        "data": [insignia for insignia in Educando.carregar_educando(id).insignias]
-    }, 200
+    insignias = [insignia.to_json() for insignia in Insignia.listar_insignias()]
+    if not insignias:
+        return {"error": "Insignias não encontradas."}, 404
+    return insignias, 200
 
-@app.route("/insignias/<int:id>/requisitos", methods=["GET"])
+@app.route("/educando/<int:id>", methods=["GET"])
+def get_educando(id):
+    educando = Educando.carregar_educando(id)
+    if not educando:
+        return {"error": "Educando não encontrado."}, 404
+    return educando.to_json(), 200
+
+@app.route("/educando/<int:id>/insignias", methods=["GET"])
+def get_insiginias_educando(id):
+    insigniasDoEducando = [insignia for insignia in Educando.carregar_educando(id).insignias]
+    if not insigniasDoEducando:
+        return {"error": "Educando não encontrado."}, 404
+    return insigniasDoEducando, 200
+
+@app.route("/insignia/<int:id>", methods=["GET"])
 def get_requisitos(id):
-    return {
-        "data": Insignia.carregar_insignia(id)
-    }, 200
-     
+    insignia = Insignia.carregar_insignia(id)
+    if not insignia:
+        return {"error": "Insignia não encontrada."}, 404
+
+    return insignia, 200
+
 @app.route("/educando/conquista", methods=["POST"])
 def post_conquista_insignia():
     if not request.is_json:
@@ -59,24 +70,15 @@ def post_conquista_insignia():
             "data_registro": datetime.now().isoformat()
         }
     }, 201
-    
+
 @app.route("/insignias/criar", methods=["POST"])
 def post_criar_insiginia():
-    # if not request.is_json:
-    #     return {"Erro, conteudo deve ser um content-type/json"}, 415
-    
     data = request.get_json()
     insignia = Insignia(data.get("id"),data.get("nome"),data.get("trilha"),data.get("niveis"))
     mensagem = insignia.gravar_insignia()
-    # if not data.get("nome"):
-    #     return {"error": "O campo 'nome' é obrigatório."}, 400
-    # if not data.get("trilha"):
-    #     return {"error": "O campo 'trilha' é obrigatório."}, 400
-    # if not data.get("niveis"):
-    #     return {"error": "O campo 'niveis' é obrigatório."}, 400
-    
+
     return {
         "status": "success",
         "message": mensagem
-        #"data": data 
+        #"data": data
     }, 201
