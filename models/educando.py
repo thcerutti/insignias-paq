@@ -26,7 +26,7 @@ class Educando(Modelo_base):
     
     def Gravar_educando(self):
         return (
-           self.nome +  "foi salvo com sucesso" 
+           self.nome +  "foi salvo com sucessoa" 
         )
 
     

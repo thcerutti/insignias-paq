@@ -90,4 +90,3 @@ def post_criar_educando():
         "status": "success",
         "mensagem": mensagem
     }, 201
-
