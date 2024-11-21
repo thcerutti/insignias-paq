@@ -49,3 +49,5 @@ class Insignia(Modelo_base):
       "trilha": self.trilha,
       "niveis": [nivel.to_json() for nivel in self.niveis]
     }
+  
+  

@@ -21,8 +21,14 @@ class Educando(Modelo_base):
     def Listar_educandos():
         return[
             Educando(1, "Nilberto", "PEDRA BRANCA", ["Programação"],  ["JAVA", "PYTHON"]),
-            Educando(2, "Joilson", "SC401", ["Programação"], ["Cookie", "Academia"])
+            Educando(2, "Joilson", "SC401", ["Programação"], ["Cookie", "Academia"]),
         ]
+    
+    def Gravar_educando(self):
+        return (
+           self.nome +  "foi salvo com sucesso" 
+        )
+
     
     def to_json (self):
         return { 
@@ -33,3 +39,4 @@ class Educando(Modelo_base):
         "insignias": self.insignias
         
     }
+

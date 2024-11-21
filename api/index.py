@@ -66,17 +66,28 @@ def post_criar_insiginia():
     #     return {"Erro, conteudo deve ser um content-type/json"}, 415
     
     data = request.get_json()
-    insignia = Insignia(data.get("id"),data.get("nome"),data.get("trilha"),data.get("niveis"))
     mensagem = insignia.gravar_insignia()
-    # if not data.get("nome"):
-    #     return {"error": "O campo 'nome' é obrigatório."}, 400
-    # if not data.get("trilha"):
-    #     return {"error": "O campo 'trilha' é obrigatório."}, 400
-    # if not data.get("niveis"):
-    #     return {"error": "O campo 'niveis' é obrigatório."}, 400
+    if not data.get("nome"):
+        return {"error": "O campo 'nome' é obrigatório."}, 400
+    if not data.get("trilha"):
+        return {"error": "O campo 'trilha' é obrigatório."}, 400
+    if not data.get("niveis"):
+        return {"error": "O campo 'niveis' é obrigatório."}, 400
     
+    insignia = Insignia(data.get("id"),data.get("nome"),data.get("trilha"),data.get("niveis"))
     return {
         "status": "success",
         "message": mensagem
         #"data": data 
     }, 201
+
+@app.route("/educando/criar", methods=['POST'])
+def post_criar_educando():
+    data = request.get_json()
+    educando = Educando(data.get("id"), data.get("nome"),data.get("trilha"), data.get("unidade"), data.get("insignias"))
+    mensagem = educando.Gravar_educando()
+    return {
+        "status": "success",
+        "mensagem": mensagem
+    }, 201
+
