@@ -7,7 +7,7 @@ db = client["meuBanco"]
 educandos_collection = db["educandosCollection"]
 
 class Educando(Modelo_base):
-    def __init__(self, id=None, nome=None, trilha=None, unidade=None, insignias=None):
+    def __init__(self, id, nome, trilha, unidade, insignias):
         self.id = id
         self.nome = nome
         self.trilha = trilha

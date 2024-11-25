@@ -1,7 +1,7 @@
 from models.modelo_base import Modelo_base
 
 class Nivel_insignia:
-    def __init__(self, id=None, requisitos=None):
+    def __init__(self, id, requisitos):
         self.id = id
         self.requisitos = requisitos or []
 
