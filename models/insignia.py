@@ -2,8 +2,12 @@ from models.modelo_base import Modelo_base
 from models.nivel_insignia import Nivel_insignia
 from pymongo import MongoClient
 from bson import ObjectId
+from dotenv import load_dotenv
+import os
 
-client = MongoClient("mongodb+srv://pedrorochaneni:<senha>@paq-insignias.qmjh0.mongodb.net/")  
+load_dotenv()
+
+client = MongoClient(os.getenv('MONGO_URL'))  
 db = client["meuBanco"]  
 insignias_collection = db["insigniasCollection"]
 
