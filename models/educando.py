@@ -26,10 +26,21 @@ class Educando(Modelo_base):
     
     def Gravar_educando(self):
         return (
-           self.nome +  "foi salvo com sucessoa" 
+         "O educando(a)" + self.nome +  "foi salvo com sucesso" 
         )
 
+
+    def atualizar_educando(self):
+        return (
+             "O educando(a)" + self.nome +  "foi atualizado com sucesso" 
+        )
     
+    def remover_educando(educando):
+        lista_educando = Educando.Listar_educandos()
+        if educando in lista_educando:
+            lista_educando.remove(educando)
+
+
     def to_json (self):
         return { 
         "id": self.id,

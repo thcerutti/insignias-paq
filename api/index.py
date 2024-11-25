@@ -90,3 +90,73 @@ def post_criar_educando():
         "status": "success",
         "mensagem": mensagem
     }, 201
+
+
+@app.route("/educando/<int:id>/editar", methods=['PUT'])
+def put_atualizar_educando(id):
+    data = request.get_json()
+    educando = Educando.carregar_educando(id)
+    if not educando:
+        return ("educando não encontrado"),404
+    
+    if "nome" in data:
+        educando.nome = data["nome"]
+    if "trilha" in data:
+        educando.trilha = data["trilha"]
+    if "unidade" in data:
+        educando.unidade = data["unidade"]
+    if "insignias" in data:
+        educando.insignias = data["insignia"]
+
+    mensagem = educando.atualizar_educando()
+    return {
+        "status": "success",
+        "mensagem" : mensagem
+    },201
+
+
+@app.route("/educando/<int:id>/deletar", methods=['DELETE'])
+def delete_deletar_educando(id):
+    educando = Educando.carregar_educando(id)
+    if not educando:
+        return ("educando não encontrado"),404
+    if Educando.remover_educando(educando):
+        return ("Educando foi deletada com sucesso!"), 200
+   
+
+    return {
+        "status": "success",
+        "educando": educando.to_json(),
+    }, 201
+
+
+@app.route("/insignia/<int:id>/atualizar", methods=['PUT'])
+def put_atualizar_insignia(id):
+    data = request.get_json()
+    insignia = Insignia.carregar_insignia(id)
+    if not insignia in data:
+        return ("Insignia não encontrada"), 404
+    
+    if "nome" in data:
+        insignia.nome = data["nome"]
+    if "trilha" in data:
+        insignia.trilha = data["trilha"]
+    if "niveis" in data:
+        insignia.niveis = data["niveis"]
+
+
+    mensagem = insignia.atualizada()
+    return {
+        "status": "success",
+        "mensagem": mensagem
+    }, 200
+
+
+@app.route("/insignia/<int:id>/deletar", methods=['DELETE'])
+def delete_deletar_insignia(id):
+    insignia = Insignia.carregar_insignia(id)
+    if not insignia:
+        return ("Insígnia não encontrada."), 404
+    
+    if Insignia.remover_insignia(insignia):
+        return ("Insígnia com foi deletada com sucesso!"), 200

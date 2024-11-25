@@ -39,8 +39,19 @@ class Insignia(Modelo_base):
     
   def gravar_insignia(self):
     return (
-      self.nome + "foi salva com sucesso"
+     "A insignia" + self.nome + "foi salva com sucesso"
     )
+  
+  def insignia_atualizada(self):
+        return (
+            "A insígnia " + self.nome + " foi atualizada com sucesso."
+        )
+  
+  def remover_insignia(insignia):
+    lista_insignia = Insignia.listar_insignias()
+    if insignia in lista_insignia:
+      lista_insignia.remove(insignia)
+
 
   def to_json(self):
     return {
