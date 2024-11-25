@@ -39,6 +39,16 @@ class Insignia(Modelo_base):
           self.id = str(result.inserted_id)
           return f"Insígnia {self.nome} salva com sucesso!"
         
+    def insignia_atualizada(self):
+          return (
+              "A insígnia " + self.nome + " foi atualizada com sucesso."
+          )
+
+    def remover_insignia(insignia):
+      lista_insignia = Insignia.listar_insignias()
+      if insignia in lista_insignia:
+        lista_insignia.remove(insignia)
+        
     def to_dict(self):
             data = {
                 "nome": self.nome,
@@ -61,3 +71,4 @@ class Insignia(Modelo_base):
             niveis=[Nivel_insignia.from_dict(nivel) for nivel in data.get("niveis", [])]
 
         )
+

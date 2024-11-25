@@ -42,6 +42,16 @@ class Educando(Modelo_base):
             result = educandos_collection.insert_one(data)
             self.id = str(result.inserted_id)
             return f"Educando {self.nome} salvo com sucesso!"
+          
+    def atualizar_educando(self):
+        return (
+             "O educando(a)" + self.nome +  "foi atualizado com sucesso" 
+        )
+    
+    def remover_educando(educando):
+        lista_educando = Educando.Listar_educandos()
+        if educando in lista_educando:
+            lista_educando.remove(educando)
 
     def to_dict(self):
         return {
