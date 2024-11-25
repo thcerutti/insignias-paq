@@ -1,2 +1,3 @@
 .venv/
-api/__pycache__/
+*/__pycache__/
+api/routes/__pycache__

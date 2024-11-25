@@ -1,51 +1,63 @@
 from models.modelo_base import Modelo_base
 from models.nivel_insignia import Nivel_insignia
+from pymongo import MongoClient
+from bson import ObjectId
+
+client = MongoClient("mongodb+srv://pedrorochaneni:<senha>@paq-insignias.qmjh0.mongodb.net/")  
+db = client["meuBanco"]  
+insignias_collection = db["insigniasCollection"]
 
 class Insignia(Modelo_base):
-
-  def __init__(self, id, nome, trilha, niveis):
-    self.id = id
-    self.nome = nome
-    self.trilha = trilha
-    self.niveis = niveis
- 
-  @staticmethod
-  def carregar_insignia(id):
-    insignia = [insignia.to_json() for insignia in Insignia.listar_insignias() if insignia.id == id]
-    return insignia[0] if insignia else None
-
-  @staticmethod
-  def listar_insignias():
-    return [
-      Insignia(1, "Python", "Programação", [
-        Nivel_insignia(1, [
-            "Leitura de arquivo CSV (Há vários dados no https://www.kaggle.com/datasets).",
-            "Transformar e utilizar do arquivo tipos primitivos: int, string, lista, tuplas e dicionários.",
-            "Estruturas condicionais e de repetição (if, else, for, while)",
-            "Criar métodos",
-            "Escrita de um arquivo CSV"
-        ]),
-        Nivel_insignia(2, [
-            "Conexão e manipulação do banco de dados.",
-            "Manipulação de strings.",
-            "Instalação de módulos externos com PiP.",
-            "Aplicação de paradigma funcional com map, reduce, filter e funções lambda."
-        ]),
-        Nivel_insignia(3, [
-            "Criação de API web com Django e Flask."
-        ])
-      ])
-    ]
+    def __init__(self, id, nome, trilha, niveis):
+        self.id = id
+        self.nome = nome
+        self.trilha = trilha
+        self.niveis = [Nivel_insignia(**nivel) if isinstance(nivel, dict) else nivel for nivel in (niveis or [])]
     
-  def gravar_insignia(self):
-    return (
-      self.nome + "foi salva com sucesso"
-    )
+    @staticmethod
+    def carregar_insignia(insignia_id):
+        if not ObjectId.is_valid(insignia_id):
+            raise ValueError(f"ID inválido: {insignia_id}")
+        
+        document = insignias_collection.find_one({"_id": ObjectId(insignia_id)})
+        if not document:
+            return None
+        return Insignia.from_dict(document)
 
-  def to_json(self):
-    return {
-      "id": self.id,
-      "nome": self.nome,
-      "trilha": self.trilha,
-      "niveis": [nivel.to_json() for nivel in self.niveis]
-    }
+    @staticmethod
+    def listar_insignias():
+        documents = insignias_collection.find()
+        return [Insignia.from_dict(doc) for doc in documents]
+
+    def gravar_insignia(self):
+      data = self.to_dict()
+      if self.id:
+          insignias_collection.update_one({"_id": ObjectId(self.id)}, {"$set": data})
+          return f"Insígnia {self.nome} atualizada com sucesso!"
+      else:
+          result = insignias_collection.insert_one(data)
+          self.id = str(result.inserted_id)
+          return f"Insígnia {self.nome} salva com sucesso!"
+        
+    def to_dict(self):
+            data = {
+                "nome": self.nome,
+                "trilha": self.trilha,
+                "niveis": [
+                   nivel.to_dict() if isinstance(nivel, Nivel_insignia) else nivel
+                   for nivel in self.niveis
+                ],
+            }
+            if self.id:
+                data["_id"] = self.id
+            return data
+
+    @staticmethod
+    def from_dict(data):
+        return Insignia(
+            id=str(data["_id"]),
+            nome=data["nome"],
+            trilha=data["trilha"],
+            niveis=[Nivel_insignia.from_dict(nivel) for nivel in data.get("niveis", [])]
+
+        )
