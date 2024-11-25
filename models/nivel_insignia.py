@@ -1,12 +1,18 @@
 from models.modelo_base import Modelo_base
 
-class Nivel_insignia(Modelo_base):
-  def __init__(self, id, requisitos):
-    self.id = id
-    self.requisitos = requisitos
+class Nivel_insignia:
+    def __init__(self, id, requisitos):
+        self.id = id
+        self.requisitos = requisitos or []
 
-  def to_json(self):
-    return {
-      "id": self.id,
-      "requisitos": self.requisitos
-    }
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "requisitos": self.requisitos,
+        }
+    @staticmethod
+    def from_dict(data):
+        return Nivel_insignia(
+            id=data["id"],
+            requisitos=data["requisitos"]
+        )
