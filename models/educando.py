@@ -6,8 +6,8 @@ import os
 
 load_dotenv()
 
-client = MongoClient(os.getenv('MONGO_URL'))  
-db = client["meuBanco"]  
+client = MongoClient(os.getenv('MONGO_URL'))
+db = client["meuBanco"]
 educandos_collection = db["educandosCollection"]
 
 class Educando(Modelo_base):
@@ -37,21 +37,21 @@ class Educando(Modelo_base):
 
     def gravar_educando(self):
         data = self.to_dict()
-        
+
         if self.id:
             educandos_collection.update_one({"_id": ObjectId(self.id)}, {"$set": data})
             return f"Educando {self.nome} atualizado com sucesso!"
-        
+
         else:
             result = educandos_collection.insert_one(data)
             self.id = str(result.inserted_id)
             return f"Educando {self.nome} salvo com sucesso!"
-          
+
     def atualizar_educando(self):
         return (
-             "O educando(a)" + self.nome +  "foi atualizado com sucesso" 
+             "O educando(a)" + self.nome +  "foi atualizado com sucesso"
         )
-    
+
     def remover_educando(educando):
         lista_educando = Educando.Listar_educandos()
         if educando in lista_educando:
@@ -62,7 +62,12 @@ class Educando(Modelo_base):
             "nome": self.nome,
             "trilha": self.trilha,
             "unidade": self.unidade,
-            "insignias": self.insignias
+            "insignias": [{
+                "id": insignia["id"],
+                "nome": insignia["nome"],
+                "nivel": insignia["nivel"],
+                "data": insignia["data"]
+            } for insignia in self.insignias]
         }
 
     @staticmethod

@@ -7,16 +7,14 @@ educandos_bp = Blueprint("educandos", __name__)
 
 @educandos_bp.route("/educandos", methods=["GET"])
 def get_educandos():
-    return {
-        "data": [educando.to_dict() for educando in Educando.listar_educandos()]
-    }, 200
+    return [educando.to_dict() for educando in Educando.listar_educandos()], 200
 
 @educandos_bp.route("/educando/<id>/insignias", methods=["GET"])
 def get_insignias_educando(id):
     educando = Educando.carregar_educando(id)
     if not educando:
         return {"error": "Educando não encontrado"}, 404
-    
+
     return {
         "data": {
             "educando_id": id,
@@ -31,13 +29,13 @@ def post_conquista_insignia():
         return {"error": "Conteúdo deve ser JSON"}, 415
 
     data = request.get_json()
-    
+
     educando = Educando.carregar_educando(data.get("educando_id"))
     insignia = Insignia.carregar_insignia(data.get("insignia_id"))
-    
+
     if not educando or not insignia:
         return {"error": "Educando ou Insignia não encontrado"}, 404
-    
+
     return {
         "data": {
             "status": "success",
@@ -67,13 +65,13 @@ def post_criar_educando():
         unidade=data.get("unidade"),
         insignias=data.get("insignias", [])
     )
-    
+
     mensagem = educando.gravar_educando()
-    
+
     return {
         "status": "success",
         "mensagem": mensagem,
-        "data": educando.to_dict()  
+        "data": educando.to_dict()
     }, 201
 
 @educandos_bp.route("/educando/<id>/editar", methods=['PUT'])
@@ -82,7 +80,7 @@ def put_atualizar_educando(id):
     educando = Educando.carregar_educando(id)
     if not educando:
         return ("educando não encontrado"),404
-    
+
     if "nome" in data:
         educando.nome = data["nome"]
     if "trilha" in data:
@@ -105,7 +103,7 @@ def delete_deletar_educando(id):
         return ("educando não encontrado"),404
     if Educando.remover_educando(educando):
         return ("Educando foi deletada com sucesso!"), 200
-   
+
     return {
         "status": "success",
         "educando": educando.to_json(),
