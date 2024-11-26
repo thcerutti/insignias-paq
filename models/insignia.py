@@ -7,8 +7,8 @@ import os
 
 load_dotenv()
 
-client = MongoClient(os.getenv('MONGO_URL'))  
-db = client["meuBanco"]  
+client = MongoClient(os.getenv('MONGO_URL'))
+db = client["meuBanco"]
 insignias_collection = db["insigniasCollection"]
 
 class Insignia(Modelo_base):
@@ -17,13 +17,14 @@ class Insignia(Modelo_base):
         self.nome = nome
         self.trilha = trilha
         self.niveis = [Nivel_insignia(**nivel) if isinstance(nivel, dict) else nivel for nivel in (niveis or [])]
-    
+
     @staticmethod
     def carregar_insignia(insignia_id):
         if not ObjectId.is_valid(insignia_id):
             raise ValueError(f"ID inválido: {insignia_id}")
-        
-        document = insignias_collection.find_one({"_id": ObjectId(insignia_id)})
+
+        document = insignias_collection.find_one(filter={"_id": ObjectId(insignia_id)})
+        print(document["nome"] + " - " + insignia_id)
         if not document:
             return None
         return Insignia.from_dict(document)
@@ -42,7 +43,7 @@ class Insignia(Modelo_base):
           result = insignias_collection.insert_one(data)
           self.id = str(result.inserted_id)
           return f"Insígnia {self.nome} salva com sucesso!"
-        
+
     def insignia_atualizada(self):
           return (
               "A insígnia " + self.nome + " foi atualizada com sucesso."
@@ -52,7 +53,7 @@ class Insignia(Modelo_base):
       lista_insignia = Insignia.listar_insignias()
       if insignia in lista_insignia:
         lista_insignia.remove(insignia)
-        
+
     def to_dict(self):
             data = {
                 "nome": self.nome,
