@@ -1,14 +1,11 @@
 from models.modelo_base import Modelo_base
-from pymongo import MongoClient
 from bson import ObjectId
 from dotenv import load_dotenv
-import os
+from config.database import crie_conexao_mongo
 
 load_dotenv()
 
-client = MongoClient(os.getenv('MONGO_URL'))
-db = client["meuBanco"]
-educandos_collection = db["educandosCollection"]
+educandos_collection = crie_conexao_mongo("educandosCollection")
 
 class Educando(Modelo_base):
     def __init__(self, id, nome, trilha, unidade, insignias):
@@ -41,6 +38,7 @@ class Educando(Modelo_base):
 
     @staticmethod
     def listar_educandos():
+        crie_conexao_mongo("educandosCollection")
         documents = educandos_collection.find()
         return [Educando.from_dict(doc) for doc in documents]
 

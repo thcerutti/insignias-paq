@@ -1,15 +1,12 @@
 from models.modelo_base import Modelo_base
 from models.nivel_insignia import Nivel_insignia
-from pymongo import MongoClient
 from bson import ObjectId
 from dotenv import load_dotenv
-import os
+from config.database import crie_conexao_mongo
 
 load_dotenv()
 
-client = MongoClient(os.getenv('MONGO_URL'))
-db = client["meuBanco"]
-insignias_collection = db["insigniasCollection"]
+insignias_collection = crie_conexao_mongo("insigniasCollection")
 
 class Insignia(Modelo_base):
     def __init__(self, id, nome, trilha, niveis):
@@ -24,7 +21,6 @@ class Insignia(Modelo_base):
             raise ValueError(f"ID inválido: {insignia_id}")
 
         document = insignias_collection.find_one(filter={"_id": ObjectId(insignia_id)})
-        print(document["nome"] + " - " + insignia_id)
         if not document:
             return None
         return Insignia.from_dict(document)
