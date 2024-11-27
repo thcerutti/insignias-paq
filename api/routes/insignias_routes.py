@@ -1,5 +1,6 @@
 from flask import Blueprint, request
 from models.insignia import Insignia
+from models.educando import Educando
 
 insignias_bp = Blueprint("insignias", __name__)
 
@@ -19,6 +20,23 @@ def get_requisitos(id):
         "nome": insignia.nome,
         "niveis": [nivel.to_dict() for nivel in insignia.niveis]
     }, 200
+
+@insignias_bp.route("/insignias/conquistadas", methods=["GET"])
+def get_insignias_conquistadas():
+    insigniasConquistadas = {}
+    educandos = Educando.listar_educandos()
+    for educando in educandos:
+        insigniasDoEducando = [insignia for insignia in educando.insignias]
+        for insignia in insigniasDoEducando:
+            if insignia['nome'] in insigniasConquistadas:
+                insigniasConquistadas[insignia['nome']] += 1
+            else:
+                insigniasConquistadas[insignia['nome']] = 1
+    listaInsignias = [{"nome": nome, "quantidade": quantidade} for nome, quantidade in insigniasConquistadas.items()]
+    ordenadaPorQuantidade = sorted(listaInsignias, key=lambda insignia: insignia["quantidade"], reverse=True)
+    if not insigniasConquistadas:
+        return {"error": "Insignias não encontradas."}, 404
+    return ordenadaPorQuantidade, 200
 
 @insignias_bp.route("/insignias/criar", methods=["POST"])
 def post_criar_insignia():
