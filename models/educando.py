@@ -59,6 +59,7 @@ class Educando(Modelo_base):
 
     def to_dict(self):
         return {
+            "id": self.id,
             "nome": self.nome,
             "trilha": self.trilha,
             "unidade": self.unidade,
