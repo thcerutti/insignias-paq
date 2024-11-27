@@ -12,6 +12,13 @@ def get_educandos():
     except Exception as e:
         return {"error": str(e)}, 500
 
+@educandos_bp.route("/educando/<id>", methods=["GET"])
+def get_educando(id):
+    educando = Educando.carregar_educando(id)
+    if not educando:
+        return {"error": "Educando não encontrado."}, 404
+    return educando.to_dict(), 200
+
 @educandos_bp.route("/educando/<id>/insignias", methods=["GET"])
 def get_insignias_educando(id):
     educando = Educando.carregar_educando(id)
