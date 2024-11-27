@@ -19,6 +19,15 @@ class Educando(Modelo_base):
         self.insignias = insignias or []
 
     @staticmethod
+    def listar_educandos_com_insignia_conquistada(insignia_id):
+        educandos = []
+        for educando in Educando.listar_educandos():
+            for insignia in educando.insignias:
+                if insignia["id"] == insignia_id:
+                    educandos.append(educando)
+        return educandos
+
+    @staticmethod
     def listar_insignias(educando_id):
         educando = Educando.carregar_educando(educando_id)
         return educando.insignias if educando else []

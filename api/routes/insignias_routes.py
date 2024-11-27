@@ -28,6 +28,16 @@ def get_requisitos(id):
         return {"error": "Insignia não encontrada."}, 404
     return insignia.to_dict(), 200
 
+@insignias_bp.route("/insignia/<id>/educandos", methods=["GET"])
+def get_educandos_por_insignia(id):
+    educandos = Educando.listar_educandos_com_insignia_conquistada(id)
+    if not educandos:
+        return {"error": "Educandos não encontrados."}, 404
+    return [{
+        "id": educando.id,
+        "nome": educando.nome,
+    } for educando in educandos], 200
+
 @insignias_bp.route("/insignias/conquistadas", methods=["GET"])
 def get_insignias_conquistadas():
     insigniasConquistadas = {}
