@@ -7,7 +7,10 @@ educandos_bp = Blueprint("educandos", __name__)
 
 @educandos_bp.route("/educandos", methods=["GET"])
 def get_educandos():
-    return [educando.to_dict() for educando in Educando.listar_educandos()], 200
+    try:
+        return [educando.to_dict() for educando in Educando.listar_educandos()], 200
+    except Exception as e:
+        return {"error": str(e)}, 500
 
 @educandos_bp.route("/educando/<id>/insignias", methods=["GET"])
 def get_insignias_educando(id):

@@ -6,7 +6,10 @@ insignias_bp = Blueprint("insignias", __name__)
 # OK
 @insignias_bp.route("/insignias", methods=["GET"])
 def get_insignias():
-    return [insignia.to_dict() for insignia in Insignia.listar_insignias()], 200
+    try:
+        return [insignia.to_dict() for insignia in Insignia.listar_insignias()], 200
+    except Exception as e:
+        return {"error": str(e)}, 500
 
 # OK
 @insignias_bp.route("/insignias/<id>/requisitos", methods=["GET"])

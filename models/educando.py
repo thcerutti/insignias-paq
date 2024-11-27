@@ -77,6 +77,6 @@ class Educando(Modelo_base):
             nome=data["nome"],
             trilha=data["trilha"],
             unidade=data["unidade"],
-            insignias=data.get("insignias", [])
+            insignias=data["insignias"]
         )
 
