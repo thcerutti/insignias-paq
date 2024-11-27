@@ -13,13 +13,20 @@ def get_insignias():
         return {"error": str(e)}, 500
 
 # OK
-@insignias_bp.route("/insignias/<id>/requisitos", methods=["GET"])
+# @insignias_bp.route("/insignias/<id>/requisitos", methods=["GET"])
+# def get_requisitos(id):
+#     insignia = Insignia.carregar_insignia(id)
+#     return {
+#         "nome": insignia.nome,
+#         "niveis": [nivel.to_dict() for nivel in insignia.niveis]
+#     }, 200
+
+@insignias_bp.route("/insignia/<id>", methods=["GET"])
 def get_requisitos(id):
     insignia = Insignia.carregar_insignia(id)
-    return {
-        "nome": insignia.nome,
-        "niveis": [nivel.to_dict() for nivel in insignia.niveis]
-    }, 200
+    if not insignia:
+        return {"error": "Insignia não encontrada."}, 404
+    return insignia.to_dict(), 200
 
 @insignias_bp.route("/insignias/conquistadas", methods=["GET"])
 def get_insignias_conquistadas():
