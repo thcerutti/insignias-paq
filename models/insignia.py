@@ -56,6 +56,7 @@ class Insignia(Modelo_base):
 
     def to_dict(self):
             data = {
+                "id": self.id,
                 "nome": self.nome,
                 "trilha": self.trilha,
                 "niveis": [
@@ -63,8 +64,6 @@ class Insignia(Modelo_base):
                    for nivel in self.niveis
                 ],
             }
-            if self.id:
-                data["_id"] = self.id
             return data
 
     @staticmethod
