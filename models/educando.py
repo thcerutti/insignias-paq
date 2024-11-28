@@ -55,14 +55,13 @@ class Educando(Modelo_base):
             return f"Educando {self.nome} salvo com sucesso!"
 
     def atualizar_educando(self):
-        return (
-             "O educando(a)" + self.nome +  "foi atualizado com sucesso"
-        )
+        res = educandos_collection.update_one({"_id": ObjectId(self.id)}, {"$set": self.to_dict()})
+        return res.modified_count > 0
+
 
     def remover_educando(educando):
-        lista_educando = Educando.Listar_educandos()
-        if educando in lista_educando:
-            lista_educando.remove(educando)
+        res = educandos_collection.delete_one({"_id": ObjectId(educando.id)})
+        return res.deleted_count > 0
 
     def to_dict(self):
         return {

@@ -2,9 +2,11 @@ from flask import Blueprint, request
 from datetime import datetime
 from models.educando import Educando
 from models.insignia import Insignia
+from models.insignia_conquistada import Insignia_conquistada
 
 educandos_bp = Blueprint("educandos", __name__)
 
+# OK
 @educandos_bp.route("/educandos", methods=["GET"])
 def get_educandos():
     try:
@@ -12,6 +14,7 @@ def get_educandos():
     except Exception as e:
         return {"error": str(e)}, 500
 
+# OK
 @educandos_bp.route("/educando/<id>", methods=["GET"])
 def get_educando(id):
     educando = Educando.carregar_educando(id)
@@ -19,6 +22,7 @@ def get_educando(id):
         return {"error": "Educando não encontrado."}, 404
     return educando.to_dict(), 200
 
+# OK
 @educandos_bp.route("/educando/<id>/insignias", methods=["GET"])
 def get_insignias_educando(id):
     educando = Educando.carregar_educando(id)
@@ -33,63 +37,43 @@ def get_insignias_educando(id):
         }
     }, 200
 
+# OK
 @educandos_bp.route("/educando/conquista", methods=["POST"])
 def post_conquista_insignia():
-    if not request.is_json:
-        return {"error": "Conteúdo deve ser JSON"}, 415
-
     data = request.get_json()
 
     educando = Educando.carregar_educando(data.get("educando_id"))
+    if not educando:
+        return {"error": "Educando não encontrado"}, 404
     insignia = Insignia.carregar_insignia(data.get("insignia_id"))
+    if not insignia:
+        return {"error": "Insignia não encontrada"}, 404
+    nivel = data.get("nivel")
+    if not nivel:
+        return {"error": "Nível da insignia é obrigatoria"}, 400
+    data_conquista = data.get("data_conquista")
+    if not data_conquista:
+        return {"error": "Data da conquista é obrigatória"}, 400
 
-    if not educando or not insignia:
-        return {"error": "Educando ou Insignia não encontrado"}, 404
+    educando.insignias.append(Insignia_conquistada(insignia.id, insignia.nome, nivel, data_conquista).to_dict())
+    educando.gravar_educando()
+    return {"message": "Insignia adicionada ao educando com sucesso!"}, 201
 
-    return {
-        "data": {
-            "status": "success",
-            "educando": {
-                "id": data["educando_id"],
-                "nome": educando.nome,
-            },
-            "insignia": {
-                "id": data["insignia_id"],
-                "nome": insignia.nome,
-                "nivel": data.get("nivel_insignia"),
-            },
-            "data_conquista": data.get("data_conquista"),
-            "data_registro": datetime.now().isoformat()
-        }
-    }, 201
-
+# OK
 @educandos_bp.route("/educando/criar", methods=["POST"])
 def post_criar_educando():
-    if not request.is_json:
-        return {"error": "Conteúdo deve ser JSON"}, 415
-
     data = request.get_json()
-    educando = Educando(
-        nome=data.get("nome"),
-        trilha=data.get("trilha"),
-        unidade=data.get("unidade"),
-        insignias=data.get("insignias", [])
-    )
+    educando = Educando(None, data.get("nome"), data.get("trilha"), data.get("unidade"), [])
+    educando.gravar_educando()
+    return {"message": "Educando gravado com o ID " + educando.id}, 201
 
-    mensagem = educando.gravar_educando()
-
-    return {
-        "status": "success",
-        "mensagem": mensagem,
-        "data": educando.to_dict()
-    }, 201
-
+# OK
 @educandos_bp.route("/educando/<id>/editar", methods=['PUT'])
 def put_atualizar_educando(id):
     data = request.get_json()
     educando = Educando.carregar_educando(id)
     if not educando:
-        return ("educando não encontrado"),404
+        return {"error": "Educando não encontrado"}, 404
 
     if "nome" in data:
         educando.nome = data["nome"]
@@ -106,15 +90,14 @@ def put_atualizar_educando(id):
         "mensagem" : mensagem
     },201
 
+# OK
 @educandos_bp.route("/educando/<id>/deletar", methods=['DELETE'])
 def delete_deletar_educando(id):
     educando = Educando.carregar_educando(id)
     if not educando:
-        return ("educando não encontrado"),404
-    if Educando.remover_educando(educando):
-        return ("Educando foi deletada com sucesso!"), 200
+        return {"error": "Educando não encontrado"}, 404
 
-    return {
-        "status": "success",
-        "educando": educando.to_json(),
-}, 201
+    if Educando.remover_educando(educando):
+        return {"message": "Educando removido com sucesso"}, 200
+
+    return {"error": "Erro ao remover educando"}, 500
