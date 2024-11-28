@@ -45,10 +45,9 @@ class Insignia(Modelo_base):
               "A insígnia " + self.nome + " foi atualizada com sucesso."
           )
 
-    def remover_insignia(insignia):
-      lista_insignia = Insignia.listar_insignias()
-      if insignia in lista_insignia:
-        lista_insignia.remove(insignia)
+    def remover_insignia(id):
+        res = insignias_collection.delete_one({"_id": ObjectId(id)})
+        return res.deleted_count > 0
 
     def to_dict(self):
             data = {

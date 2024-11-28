@@ -13,14 +13,6 @@ def get_insignias():
         return {"error": str(e)}, 500
 
 # OK
-# @insignias_bp.route("/insignias/<id>/requisitos", methods=["GET"])
-# def get_requisitos(id):
-#     insignia = Insignia.carregar_insignia(id)
-#     return {
-#         "nome": insignia.nome,
-#         "niveis": [nivel.to_dict() for nivel in insignia.niveis]
-#     }, 200
-
 @insignias_bp.route("/insignia/<id>", methods=["GET"])
 def get_requisitos(id):
     insignia = Insignia.carregar_insignia(id)
@@ -28,6 +20,7 @@ def get_requisitos(id):
         return {"error": "Insignia não encontrada."}, 404
     return insignia.to_dict(), 200
 
+# OK
 @insignias_bp.route("/insignia/<id>/educandos", methods=["GET"])
 def get_educandos_por_insignia(id):
     educandos = Educando.listar_educandos_com_insignia_conquistada(id)
@@ -38,6 +31,7 @@ def get_educandos_por_insignia(id):
         "nome": educando.nome,
     } for educando in educandos], 200
 
+# OK
 @insignias_bp.route("/insignias/conquistadas", methods=["GET"])
 def get_insignias_conquistadas():
     insigniasConquistadas = {}
@@ -55,6 +49,7 @@ def get_insignias_conquistadas():
         return {"error": "Insignias não encontradas."}, 404
     return ordenadaPorQuantidade, 200
 
+# OK
 @insignias_bp.route("/insignias/criar", methods=["POST"])
 def post_criar_insignia():
     if not request.is_json:
@@ -74,13 +69,13 @@ def post_criar_insignia():
         "message": mensagem
     }, 201
 
-
+# OK
 @insignias_bp.route("/insignia/<id>/atualizar", methods=['PUT'])
 def put_atualizar_insignia(id):
     data = request.get_json()
     insignia = Insignia.carregar_insignia(id)
-    if not insignia in data:
-        return ("Insignia não encontrada"), 404
+    if not insignia:
+        return {"error": "Insígnia não encontrada"}, 404
 
     if "nome" in data:
         insignia.nome = data["nome"]
@@ -90,17 +85,18 @@ def put_atualizar_insignia(id):
         insignia.niveis = data["niveis"]
 
 
-    mensagem = insignia.atualizada()
+    mensagem = insignia.gravar_insignia()
     return {
         "status": "success",
         "mensagem": mensagem
     }, 200
 
+# OK
 @insignias_bp.route("/insignia/<id>/deletar", methods=['DELETE'])
 def delete_deletar_insignia(id):
     insignia = Insignia.carregar_insignia(id)
     if not insignia:
-        return ("Insígnia não encontrada."), 404
+        return {"error": "Insígnia não encontrada"}, 404
 
-    if Insignia.remover_insignia(insignia):
-        return ("Insígnia com foi deletada com sucesso!"), 200
+    if Insignia.remover_insignia(id):
+        return {"message": "Insígnia removida com sucesso"}, 200
